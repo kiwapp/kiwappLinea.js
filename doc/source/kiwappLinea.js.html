@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>kiwappLinea.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "Users/adriencarta/KiwappLib/doc/kiwappLinea/src/source/kiwappLinea.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <script src="../goToLine.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+  <link rel="stylesheet" href="../goToLine.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>kiwappLinea.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>browserify modules dependencies</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">var</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../utils/event&#39;</span><span class="p">),</span>
+        <span class="nx">extend</span>       <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../utils/extend&#39;</span><span class="p">),</span>
+        <span class="nx">Kiwapp</span>       <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">Kiwapp</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Wrapper for Kiwapp native API calls</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">var</span> <span class="nx">launch</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">launch</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">driver</span><span class="p">().</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;callApp&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">call</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+            <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span>
+        <span class="p">});</span>
+    <span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>KWLinea class</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">function</span> <span class="nx">KWLinea</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">EventEmitter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">version</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./version&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">available</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+        <span class="nx">eventsListening</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>EventEmitter interface</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">KWLinea</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">EventEmitter</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Call native to know if Linea device is available</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">KWLinea</span>
+      <span>return the current instance</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">KWLinea</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">connect</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">KWLineaConnect</span><span class="p">(){</span>
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Try to connect Linea device&#39;</span><span class="p">);</span>
+        <span class="nx">launch</span><span class="p">(</span><span class="s1">&#39;is_linea_barcode_scanner_available&#39;</span><span class="p">,</span> <span class="p">{});</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Active the Linea device scan</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>{Object} config The scan configuration</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">KWLinea</span>
+      <span class="dox_type">false</span>
+      <span>Return current instance if success, else return false</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">KWLinea</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">scan</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">KWLineaScan</span><span class="p">(</span><span class="nx">config</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">triggerError</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+        <span class="nx">extend</span><span class="p">({},</span> <span class="p">{</span>
+            <span class="nx">timeout</span> <span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="nx">sound</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">multiscan</span> <span class="o">:</span> <span class="kc">false</span>
+        <span class="p">},</span> <span class="nx">config</span><span class="p">);</span>
+
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Scanning&#39;</span><span class="p">);</span>
+        <span class="nx">launch</span><span class="p">(</span><span class="s1">&#39;linea_barcode_scan&#39;</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Stop current scanning Linea device action</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">KWLinea</span>
+      <span>Return current instance if success, else return false</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">KWLinea</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">stop</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">KWLineaStop</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">triggerError</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Stop scanning&#39;</span><span class="p">);</span>
+        <span class="nx">launch</span><span class="p">(</span><span class="s1">&#39;linea_cancel_barcode_scan&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Set the Physical Button</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>{Boolean} enabled Define if the Physical Button is enabled</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">KWLinea</span>
+      <span>Return current instance if success, else return false</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">KWLinea</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">physicalButton</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">KWLineaPhysicalButton</span><span class="p">(</span><span class="nx">enabled</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">triggerError</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;physicalButton&#39;</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] New Physical button state :&#39;</span><span class="o">+</span><span class="nx">enabled</span><span class="p">);</span>
+        <span class="nx">launch</span><span class="p">(</span><span class="s1">&#39;linea_enable_scan_button&#39;</span><span class="p">,</span> <span class="nx">enabled</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Call native to get Linea device battery state</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">KWLinea</span>
+      <span>Return current instance if success, else return false</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">KWLinea</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">battery</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">KWLineaBattery</span><span class="p">(){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">triggerError</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;battery&#39;</span><span class="p">))</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Waiting for battery informations&#39;</span><span class="p">);</span>
+        <span class="nx">launch</span><span class="p">(</span><span class="s1">&#39;linea_get_battery_information&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>[Private] Active events listening for KWLinea instance</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>{KWLinea} self Instance listening events</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">undefined</span>
+      <span>Return undefined</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">function</span> <span class="nx">eventsListening</span><span class="p">(</span><span class="nx">self</span><span class="p">){</span>
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">driver</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;isLineaBarcodeScannerAvailable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">infos</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">infos</span><span class="p">.</span><span class="nx">status</span><span class="p">){</span>
+                <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Linea device is available&#39;</span><span class="p">);</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">available</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Linea device is unavailable&#39;</span><span class="p">);</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">available</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="nx">triggerError</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;connect&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">driver</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;lineaAnswer&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">){</span>
+            <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Scanning success&#39;</span><span class="p">);</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;scan:success&#39;</span><span class="p">,</span> <span class="nx">answer</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">driver</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;lineaBatteryInformation&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">){</span>
+            <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] Battery informations get&#39;</span><span class="p">);</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;battery:success&#39;</span><span class="p">,</span> <span class="nx">answer</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Check if KWLinea is available
+Trigger error events</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Params</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>{KWLinea} self   Instance triggering error events</span>
+    </div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span>{String} action Action which can't work</span>
+    </div>
+    <div class="dox_tag_title">Returns</div>
+    <div class="dox_tag_detail">
+      <span class="dox_tag_name"></span>
+      <span class="dox_type">Boolean</span>
+      <span>If the KWLinea device is available : return true, else : return false</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">function</span> <span class="nx">triggerError</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">action</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">self</span><span class="p">.</span><span class="nx">available</span><span class="p">){</span>
+            <span class="nx">Kiwapp</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[JS@KWLinea] &#39;</span><span class="o">+</span><span class="nx">action</span><span class="o">+</span><span class="s1">&#39; is impossible : Linea device is unavailable&#39;</span><span class="p">);</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nx">action</span><span class="p">);</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="nx">action</span><span class="o">+</span><span class="s1">&#39;:error&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>add KWLinea to window</p>
+  </div>
+  <div class="body">
+  </div>
+  <div class="details">
+    <div class="dox_tag_title">Type</div>
+    <div class="dox_tag_detail">
+      <span class="dox_type">KWLinea
+</span>
+    </div>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">KWLinea</span>  <span class="o">=</span> <span class="nx">KWLinea</span><span class="p">;</span>
+    <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">KWLinea</span><span class="p">;</span>
+<span class="p">})();</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

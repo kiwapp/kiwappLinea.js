@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "Users/adriencarta/KiwappLib/doc/kiwappLinea/src/index.js", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+  <script src="fileSearch.js"></script>
+  <script src="goToLine.js"></script>
+  <link rel="stylesheet" href="fileSearch.css" />
+  <link rel="stylesheet" href="goToLine.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#how%20to%20use%20kiwapplinea.js">How To Use kiwappLinea.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#initialize%20linea">Initialize Linea</a>
+      </div>
+      <div class="heading h3">
+        <a href="#scanning">Scanning</a>
+      </div>
+      <div class="heading h3">
+        <a href="#linea%20management">Linea management</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="how%20to%20use%20kiwapplinea.js">
+  <h1>
+    <a href="#how%20to%20use%20kiwapplinea.js" name="how%20to%20use%20kiwapplinea.js" class="pilcrow">&#182;</a>
+    How To Use kiwappLinea.js
+  </h1>
+</div>
+
+
+<p>kiwappLinea.js is a kiwapp.js based labrary which provides you simple methods to
+use the Linea device.</p>
+
+<p>It can not work without Kiwapp.js loaded in your application.
+You have to initialize kiwapp before using the kiwappLinea methods.</p>
+
+<div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="initialize%20linea">
+  <h3>
+    <a href="#initialize%20linea" name="initialize%20linea" class="pilcrow">&#182;</a>
+    Initialize Linea
+  </h3>
+</div>
+
+
+<p>Once Kiwapp is initialized, you can create a Linea bridge.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre></pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">linea</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">KWLinea</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>The your linea bridge will try to initialize a connection with the Linea device.
+This can success :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">===</span> <span class="kc">true</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Or this can fail :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">===</span> <span class="kc">false</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>The linea bridge is an event emitter.
+This means it triggers events when he does something.
+You also can listen this events :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>To be sure of the Linea device enabling, we advice you to test connection before launching any action :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;You can safely call the linea bridge methods.&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;connect&#39;</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;You can not call the linea bridge methods.&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">linea</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="scanning">
+  <h3>
+    <a href="#scanning" name="scanning" class="pilcrow">&#182;</a>
+    Scanning
+  </h3>
+</div>
+
+
+<p>The main utility of the Linea device is scanning bar codes.
+There is options to customize the scan action.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="kd">var</span> <span class="nx">configuration</span> <span class="o">=</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>The time in seconds before leaving the scanning mode :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">timeout</span> <span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Enabling sound or not :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">sound</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>Enabling the multiscan :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">multiscan</span> <span class="o">:</span> <span class="kc">false</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>Scanning :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">scan</span><span class="p">(</span><span class="nx">configuration</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
+</div>
+<p>The scanning response is async, so you have to listen the 'scan:success' event to
+get the response.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scan:success&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p>Exemple of scanning response :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">deviceId</span> <span class="o">:</span> <span class="s1">&#39;12UO920&#39;</span><span class="p">,</span>
+    <span class="nx">deviceType</span> <span class="o">:</span> <span class="s1">&#39;LINEAV2.1&#39;</span><span class="p">,</span>
+    <span class="nx">deviceInfo</span> <span class="o">:</span> <span class="s1">&#39;TYPE 445537&#39;</span><span class="p">,</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p>Here is the bar code :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">deviceData</span> <span class="o">:</span> <span class="s1">&#39;445688278400058600&#39;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">scan</span><span class="p">(</span><span class="nx">configuration</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+</div>
+<p>Like any method in the linea bridge, scanning can fail if the Linea device isn't ready.
+So you can listen the event 'scan:error' :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scan:error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Scan failed&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">scan</span><span class="p">(</span><span class="nx">configuration</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>You can stop scanning at any moment using this method :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="linea%20management">
+  <h3>
+    <a href="#linea%20management" name="linea%20management" class="pilcrow">&#182;</a>
+    Linea management
+  </h3>
+</div>
+
+
+<p>The linea bridge provides you some methods to manage the Linea device.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>To know about the battery current state :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">battery</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>The battery response is async, so you have to listen the 'battery:success' event to
+get the response.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;battery:success&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">battery</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>This can fail if the Linea isn't enabled.
+So you can listen the event 'battery:error' :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;battery:error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Getting battery informations failed&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">battery</span><span class="p">();</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<p>To enable/disable the physical Linea button on the right, you can use this method :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">physicalButton</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+</div>
+<p>This can fail if the Linea isn't enabled.
+So you can listen the event 'physicalButton:error' :</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;physicalButton:error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Enabling physical button failed&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">linea</span><span class="p">.</span><span class="nx">physicalButton</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
