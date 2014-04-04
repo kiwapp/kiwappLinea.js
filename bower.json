@@ -1,0 +1,27 @@
+{
+  "name": "kiwappLinea.js",
+  "main": "./kiwappLinea.js",
+  "version": "1.0.2",
+  "homepage": "kiwapp.github.io/kiwapp.js",
+  "authors": [
+    "Adrien Carta adrien@procheo.fr"
+  ],
+  "description": "Enhance your application with Linea support.",
+  "keywords": [
+    "Kiwapp",
+    "Linea"
+  ],
+  "license": "GPL v2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "gulpfile.js",
+    "bower.json",
+    "package.json",
+    "README.md",
+    "javascripts"
+  ]
+}
